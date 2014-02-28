@@ -216,9 +216,10 @@ module Kitchen
         require 'pp'
         pp server
         begin
-          info "11111111111111"
+
           puts server.public_methods
-          pub, priv = server.public_ip_addresses, server.private_ip_addresses
+          pub = nil
+          priv = server.addresses['215'][0]['addr']
 
           info "222222222222222"
         rescue Fog::Compute::OpenStack::NotFound
