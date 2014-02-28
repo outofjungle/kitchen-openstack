@@ -216,10 +216,12 @@ module Kitchen
         require 'pp'
         pp server
         begin
+          info "11111111111111"
           pub, priv = server.public_ip_addresses, server.private_ip_addresses
 
-          info "**********"
+          info "222222222222222"
         rescue Fog::Compute::OpenStack::NotFound
+          info "33333333333333"
           # See Fog issue: https://github.com/fog/fog/issues/2160
           addrs = server.addresses
           addrs['public'] and pub = addrs['public'].map { |i| i['addr'] }
