@@ -61,11 +61,6 @@ module Kitchen
         state[:server_id] = server.id
         info "OpenStack instance <#{state[:server_id]}> created."
         server.wait_for { print '.'; ready? } ; info "\n(server ready)"
-        if config[:floating_ip_pool]
-          attach_ip_from_pool(server, config[:floating_ip_pool])
-        elsif config[:floating_ip]
-          attach_ip(server, config[:floating_ip])
-        end
         state[:hostname] = get_ip(server)
         state[:ssh_key] = config[:private_key_path]
         wait_for_sshd(state[:hostname], config[:username],
