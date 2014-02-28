@@ -215,6 +215,8 @@ module Kitchen
           return server.addresses[config[:openstack_network_name]].first['addr']
         end
         info "++++++++++++++++++++++++++++++++++++"
+        require 'pp'
+        pp server
         begin
           pub, priv = server.public_ip_addresses, server.private_ip_addresses
         rescue Fog::Compute::OpenStack::NotFound
