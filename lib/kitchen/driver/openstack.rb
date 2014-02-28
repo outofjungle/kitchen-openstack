@@ -214,6 +214,7 @@ module Kitchen
           debug "Using configured net: #{config[:openstack_network_name]}"
           return server.addresses[config[:openstack_network_name]].first['addr']
         end
+        info "++++++++++++++++++++++++++++++++++++"
         begin
           pub, priv = server.public_ip_addresses, server.private_ip_addresses
         rescue Fog::Compute::OpenStack::NotFound
