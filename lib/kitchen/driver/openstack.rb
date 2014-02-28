@@ -62,7 +62,6 @@ module Kitchen
         info "OpenStack instance <#{state[:server_id]}> created."
         server.wait_for { print '.'; ready? } ; info "\n(server ready)"
         state[:hostname] = get_ip(server)
-        info "******************************"
         state[:ssh_key] = config[:private_key_path]
         wait_for_sshd(state[:hostname], config[:username],
           { :port => config[:port] }) ; info '(ssh ready)'
@@ -71,9 +70,7 @@ module Kitchen
         end
         info "Using public SSH key <#{config[:public_key_path]}>"
         info "Using private SSH key <#{config[:private_key_path]}>"
-        unless config[:key_name]
-          do_ssh_setup(state, config, server)
-        end
+
       rescue Fog::Errors::Error, Excon::Errors::Error => ex
         raise ActionFailed, ex.message
       end
@@ -221,9 +218,7 @@ module Kitchen
           pub = nil
           priv = server.addresses['215'][0]['addr']
 
-          info "222222222222222"
         rescue Fog::Compute::OpenStack::NotFound
-          info "33333333333333"
           # See Fog issue: https://github.com/fog/fog/issues/2160
           addrs = server.addresses
           addrs['public'] and pub = addrs['public'].map { |i| i['addr'] }
