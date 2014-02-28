@@ -214,7 +214,6 @@ module Kitchen
         pp server
         begin
 
-          puts server.public_methods
           pub = nil
           priv = server.addresses['215'][0]['addr']
 
