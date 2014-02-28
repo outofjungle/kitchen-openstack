@@ -61,7 +61,6 @@ module Kitchen
         state[:server_id] = server.id
         info "OpenStack instance <#{state[:server_id]}> created."
         server.wait_for { print '.'; ready? } ; info "\n(server ready)"
-        info "******************************"
         state[:hostname] = get_ip(server)
         info "******************************"
         state[:ssh_key] = config[:private_key_path]
@@ -214,11 +213,12 @@ module Kitchen
           debug "Using configured net: #{config[:openstack_network_name]}"
           return server.addresses[config[:openstack_network_name]].first['addr']
         end
-        info "++++++++++++++++++++++++++++++++++++"
         require 'pp'
         pp server
         begin
           pub, priv = server.public_ip_addresses, server.private_ip_addresses
+
+          info "**********"
         rescue Fog::Compute::OpenStack::NotFound
           # See Fog issue: https://github.com/fog/fog/issues/2160
           addrs = server.addresses
