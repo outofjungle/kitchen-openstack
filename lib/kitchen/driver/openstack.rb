@@ -217,6 +217,7 @@ module Kitchen
         pp server
         begin
           info "11111111111111"
+          puts server.class
           pub, priv = server.public_ip_addresses, server.private_ip_addresses
 
           info "222222222222222"
