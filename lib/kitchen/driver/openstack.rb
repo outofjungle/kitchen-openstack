@@ -61,7 +61,9 @@ module Kitchen
         state[:server_id] = server.id
         info "OpenStack instance <#{state[:server_id]}> created."
         server.wait_for { print '.'; ready? } ; info "\n(server ready)"
+        info "******************************"
         state[:hostname] = get_ip(server)
+        info "******************************"
         state[:ssh_key] = config[:private_key_path]
         wait_for_sshd(state[:hostname], config[:username],
           { :port => config[:port] }) ; info '(ssh ready)'
